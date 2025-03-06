@@ -1,0 +1,53 @@
+{% extends 'rentals/base.html' %}
+
+{% block content %}
+<div class="form-container">
+    <h2>Rent {{ yacht.name }}</h2>
+    <form method="post" id="rentalForm">
+        {% csrf_token %}
+        {{ form.non_field_errors }}
+        {{ form.start_date.label_tag }} {{ form.start_date }}
+        {{ form.end_date.label_tag }} {{ form.end_date }}
+        {{ form.name.label_tag }} {{ form.name }}
+        {{ form.surname.label_tag }} {{ form.surname }}
+        {{ form.phone_number.label_tag }} {{ form.phone_number }}
+        <span id="phoneError" style="color: red; display: none;">
+            phone number must contain exactly 9 digits and digits only.</span>
+
+        <label>Optional Services:</label>
+        <div class="checkbox-group">
+            <label>
+                {{ form.skipper }} Skipper
+            </label>
+        </div>
+        <div class="checkbox-group">
+            <label>
+                {{ form.life_jackets }} Life Jackets
+            </label>
+        </div>
+        <div class="checkbox-group">
+            <label>
+                {{ form.gps }} GPS
+            </label>
+        </div>
+
+        <button type="submit" class="btn">Submit</button>
+    </form>
+</div>
+
+<script>
+    document.getElementById("rentalForm").addEventListener("submit", function (event) {
+        const phoneField = document.querySelector("input[name='phone_number']");
+        const phoneError = document.getElementById("phoneError");
+
+        const phoneRegex = /^\d{9}$/;
+        if (!phoneRegex.test(phoneField.value)) {
+            event.preventDefault();
+            phoneError.style.display = "block";
+            phoneField.focus();
+        } else {
+            phoneError.style.display = "none";
+        }
+    });
+</script>
+{% endblock %}

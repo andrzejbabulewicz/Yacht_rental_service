@@ -1,0 +1,11 @@
+{% extends 'rentals/base.html' %}
+
+{% block content %}
+<h2>Rent {{ yacht.name }}</h2>
+<p>You need to choose one of the following options to proceed:</p>
+<ul>
+    <li><a href="{% url 'rental_form' yacht.id %}">Rent Without Registration</a></li>
+    <li><a href="{% url 'login' %}?next={% url 'rental_form' yacht.id %}">Log In</a></li>
+    <li><a href="{% url 'register' %}?next={% url 'rental_form' yacht.id %}">Register</a></li>
+</ul>
+{% endblock %}

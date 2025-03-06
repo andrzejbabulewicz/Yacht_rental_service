@@ -1,0 +1,27 @@
+{% extends 'rentals/base.html' %}
+
+{% block content %}
+<div class="yacht-detail-card">
+    <h2>{{ yacht.name }}</h2>
+
+    {% if yacht.photo %}
+        <img src="{{ yacht.photo.url }}" alt="{{ yacht.name }}" class="yacht-photo">
+    {% else %}
+        <div class="no-photo">No photo available for this yacht.</div>
+    {% endif %}
+
+    <div class="yacht-info">
+        <p><strong>Type:</strong> {{ yacht.type }}</p>
+        <p><strong>Capacity:</strong> {{ yacht.capacity }}</p>
+        <p><strong>Price per day:</strong> ${{ yacht.price_per_day }}</p>
+        <p><strong>Description:</strong> {{ yacht.description }}</p>
+        <p><strong>Status:</strong> {{ yacht.get_status_display }}</p>
+    </div>
+
+    {% if yacht.status == 'available' %}
+        <a href="{% url 'rental_form' yacht.id %}" class="btn rent-btn">Rent this Yacht</a>
+    {% else %}
+        <p class="unavailable">This yacht is currently unavailable.</p>
+    {% endif %}
+</div>
+{% endblock %}

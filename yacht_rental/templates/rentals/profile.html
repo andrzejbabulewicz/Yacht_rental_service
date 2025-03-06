@@ -1,0 +1,17 @@
+{% extends 'rentals/base.html' %}
+
+{% block content %}
+<div class="profile-container">
+    <h2>Welcome to Your Profile, {{ user.username }}!</h2>
+    <div>
+        <h3 class="profile-section-title">My Reservations</h3>
+        <a href="{% url 'my_rentals' %}" class="btn">View My Reservations</a>
+    </div>
+    <div>
+        <h3 class="profile-section-title">Account Management</h3>
+        <a href="{% url 'password_change' %}" class="btn">Change Password</a>
+    </div>
+</div>
+
+
+{% endblock %}

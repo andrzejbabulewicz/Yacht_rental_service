@@ -1,0 +1,24 @@
+{% extends 'rentals/base.html' %}
+
+{% block content %}
+   <div class="profile-container">
+    <h2>My Reservations</h2>
+    {% if rentals %}
+        <ul>
+            {% for rental in rentals %}
+                <li>
+                    <strong>Yacht:</strong> {{ rental.yacht.name }}<br>
+                    <strong>Start Date:</strong> {{ rental.start_date }}<br>
+                    <strong>End Date:</strong> {{ rental.end_date }}<br>
+                    <strong>Total Price:</strong> ${{ rental.total_price }}<br>
+
+                    <a href="{% url 'edit_rental' rental.id %}" class="btn">Edit Reservation</a>
+                </li>
+                <hr>
+            {% endfor %}
+        </ul>
+    {% else %}
+        <p>You have no reservations.</p>
+    {% endif %}
+</div>
+{% endblock %}

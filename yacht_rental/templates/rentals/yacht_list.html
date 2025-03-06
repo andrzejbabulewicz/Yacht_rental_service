@@ -1,0 +1,26 @@
+{% extends 'rentals/base.html' %}
+
+{% block content %}
+<h2 class="page-title">Rent a yacht with us!</h2>
+<div class="yacht-list">
+    {% for yacht in yachts %}
+        <div class="yacht-card">
+            {% if yacht.photo %}
+                <img src="{{ yacht.photo.url }}" alt="{{ yacht.name }}" class="yacht-photo">
+            {% else %}
+                <div class="no-photo">No photo available</div>
+            {% endif %}
+            <div class="yacht-card-content">
+                <h3>{{ yacht.name }}</h3>
+                <p><strong>Type:</strong> {{ yacht.type }}</p>
+                <p><strong>Capacity:</strong> {{ yacht.capacity }}</p>
+                <p><strong>Price per day:</strong> ${{ yacht.price_per_day }}</p>
+                <p><strong>Description:</strong> {{ yacht.description }}</p>
+                <a href="{% url 'yacht_detail' yacht.id %}" class="btn view-details-btn">View Details</a>
+            </div>
+        </div>
+    {% empty %}
+        <p>No yachts available at the moment.</p>
+    {% endfor %}
+</div>
+{% endblock %}
